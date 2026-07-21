@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicholas Major — UX Researcher</title>
+<meta name="description" content="Mixed-methods UX researcher. M.S. Psychology. I run experiments on how interfaces change behavior.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF6;
+    --ink:#20242A;
+    --ink-soft:#5A6068;
+    --line:#E3E2DA;
+    --exp-blue:#2F6DAE;
+    --exp-blue-deep:#1E4E82;
+    --ctrl-green:#6FA05E;
+    --stim-red:#D0483E;
+    --card:#FFFFFF;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--exp-blue);color:#fff}
+
+  a{color:var(--exp-blue-deep)}
+  a:focus-visible,button:focus-visible{outline:2.5px solid var(--exp-blue);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+  .narrow{max-width:720px;margin:0 auto}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,250,246,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-family:var(--mono);font-size:13.5px;letter-spacing:.04em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:9px;font-weight:500}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--stim-red);display:inline-block}
+  .nav-links{display:flex;gap:26px;align-items:center;list-style:none}
+  .nav-links a{font-size:14px;text-decoration:none;color:var(--ink-soft);font-weight:500}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.resume{color:var(--exp-blue-deep);border:1.5px solid var(--exp-blue);padding:7px 14px;border-radius:6px}
+  .nav-links a.resume:hover{background:var(--exp-blue);color:#fff}
+  @media(max-width:620px){.nav-links{gap:16px}.nav-links li.hide-m{display:none}}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:84px 0 70px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px}
+  .eyebrow b{color:var(--stim-red);font-weight:500}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(34px,5.6vw,58px);line-height:1.08;letter-spacing:-.015em;max-width:15ch}
+  h1 .stim{display:inline-block;vertical-align:baseline;width:.72em;height:.72em;background:var(--stim-red);border-radius:50%;transform:translateY(.06em);transition:border-radius .45s cubic-bezier(.6,0,.2,1),background .45s}
+  h1 .stim.sq{border-radius:4px;background:var(--exp-blue)}
+  .hero-sub{margin-top:26px;font-size:18.5px;color:var(--ink-soft);max-width:56ch}
+  .hero-sub strong{color:var(--ink);font-weight:600}
+  .trial-cue{margin-top:44px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:10px 0;align-items:center}
+  .trial-cue span.cue{border:1px solid var(--line);background:var(--card);padding:6px 12px}
+  .trial-cue span.cue.on{border-color:var(--exp-blue);color:var(--exp-blue-deep)}
+  .trial-cue span.plus{padding:0 12px;color:var(--stim-red)}
+  .hero-stats{margin-top:44px;display:flex;flex-wrap:wrap;gap:34px}
+  .hstat .n{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.01em}
+  .hstat .l{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.05em;margin-top:2px}
+
+  /* ---------- sections ---------- */
+  section{padding:74px 0;border-bottom:1px solid var(--line)}
+  .sec-cue{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;color:var(--ink-soft);margin-bottom:14px}
+  .sec-cue em{font-style:normal;color:var(--exp-blue-deep)}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.01em;line-height:1.15;margin-bottom:18px}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;margin:34px 0 10px}
+  p{margin-bottom:16px}
+  p.lede{font-size:18px;color:var(--ink-soft)}
+
+  /* ---------- case study card ---------- */
+  .study{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:clamp(26px,4vw,46px);margin-top:34px;box-shadow:0 1px 0 rgba(32,36,42,.04)}
+  .study .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;background:var(--paper);border:1px solid var(--line);padding:4px 10px;border-radius:999px;color:var(--ink-soft)}
+  .tag.blue{border-color:var(--exp-blue);color:var(--exp-blue-deep)}
+  .study h3.title{font-size:clamp(21px,2.6vw,27px);margin:0 0 6px}
+  .study .sub{color:var(--ink-soft);margin-bottom:22px}
+
+  .findings{list-style:none;margin:22px 0 6px;display:grid;gap:14px}
+  .findings li{padding-left:26px;position:relative}
+  .findings li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;background:var(--exp-blue);border-radius:50%}
+  .findings li:nth-child(2)::before{border-radius:3px;background:var(--stim-red)}
+  .findings li:nth-child(3)::before{border-radius:3px;background:var(--ctrl-green)}
+  .findings li:nth-child(4)::before{border-radius:50%;background:var(--stim-red)}
+  .findings b{font-weight:600}
+
+  /* chart */
+  figure.chart{margin:30px 0 8px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px 22px 14px}
+  figure.chart figcaption{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.5}
+  .legend{display:flex;gap:18px;font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:12px;flex-wrap:wrap}
+  .legend i{width:10px;height:10px;display:inline-block;margin-right:6px;transform:translateY(1px)}
+
+  .implications{margin-top:26px;border-top:1px dashed var(--line);padding-top:22px}
+  .implications ol{margin:10px 0 0 20px;display:grid;gap:10px}
+  .implications li::marker{font-family:var(--mono);color:var(--exp-blue-deep);font-size:13px}
+
+  .study-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{font-family:var(--body);font-weight:600;font-size:14.5px;text-decoration:none;padding:11px 18px;border-radius:7px;display:inline-block}
+  .btn.primary{background:var(--exp-blue);color:#fff;border:1.5px solid var(--exp-blue)}
+  .btn.primary:hover{background:var(--exp-blue-deep);border-color:var(--exp-blue-deep)}
+  .btn.ghost{border:1.5px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--ink)}
+
+  /* upcoming study */
+  .study.soon{background:transparent;border-style:dashed;box-shadow:none}
+  .study.soon .title{color:var(--ink-soft)}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:54px;margin-top:8px}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:30px}}
+  .skill-block{margin-bottom:22px}
+  .skill-block .k{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+  .skill-block .v{font-size:15px;line-height:1.7}
+
+  /* ---------- contact ---------- */
+  section.contact{border-bottom:none;padding-bottom:96px}
+  .contact-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    h1 .stim{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>N.MAJOR / RESEARCH</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li class="hide-m"><a href="#about">About</a></li>
+      <li class="hide-m"><a href="#contact">Contact</a></li>
+      <li><a class="resume" href="Nicholas_Major_UX_Resume.pdf">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Nicholas Major <b>·</b> UX Researcher <b>·</b> M.S. Psychology</p>
+    <h1>I run experiments on how interfaces change <span class="stim" id="stim" aria-hidden="true"></span> behavior.</h1>
+    <p class="hero-sub">Mixed-methods researcher with 4+ years designing and running human-subjects studies — controlled experiments, usability testing, and large-scale surveys — and translating what users <strong>actually do</strong> into design decisions. Based in eastern Pennsylvania; open to roles across PA / NY / NJ and remote.</p>
+    <div class="trial-cue" aria-hidden="true">
+      <span class="cue on">experiments</span><span class="plus">+</span><span class="cue">surveys</span><span class="plus">+</span><span class="cue">usability&nbsp;testing</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="n">160+</div><div class="l">participants run</div></div>
+      <div class="hstat"><div class="n">4 yrs</div><div class="l">human-subjects research</div></div>
+      <div class="hstat"><div class="n">3</div><div class="l">research programs</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <p class="sec-cue rv">[ <em>selected work</em> | about | contact ]</p>
+    <h2 class="rv">Case studies</h2>
+    <p class="lede rv narrow-none">Real studies, real participants, honestly reported — including the results that didn't go the way anyone hoped. That's the point.</p>
+
+    <article class="study rv" id="gamification">
+      <div class="tag-row">
+        <span class="tag blue">Controlled experiments</span><span class="tag">N = 160+</span><span class="tag">Python</span><span class="tag">JASP</span><span class="tag">Survey design</span>
+      </div>
+      <h3 class="title">Does gamification actually change how users think?</h3>
+      <p class="sub">Two experiments on points, badges, and choice — and what they really buy you. M.S. thesis, Lehigh University.</p>
+
+      <p>Products gamify constantly on the assumption that game elements make users more engaged and even more creative — but most evidence is correlational. I built a gamified task environment in Python (points, badges, unlockable stages, performance feedback) and ran two randomized experiments measuring what those mechanics do to cognitive flexibility, creative problem-solving, and motivation.</p>
+
+      <ul class="findings">
+        <li><b>Placement beats presence.</b> Rewards placed <i>between</i> task blocks did nothing — and slightly hurt performance. The same rewards embedded trial-by-trial inside the interaction loop made users respond ~270&nbsp;ms faster and cut switch costs by 60%.</li>
+        <li><b>Users optimize for exactly what you reward.</b> Paying for speed bought speed — and cost 5 points of accuracy. A classic speed–accuracy trade-off, created by the incentive design itself.</li>
+        <li><b>Perceived competence was the most movable lever</b> (d&nbsp;=&nbsp;0.69), responding strongly to immediate performance feedback while superficial choice barely moved autonomy.</li>
+        <li><b>Creativity didn't budge on average</b> — but users who actively engaged with the game systems solved 67% of insight problems vs. 47% for unengaged users. Engagement, not gamification per se, may be the active ingredient.</li>
+      </ul>
+
+      <figure class="chart">
+        <div class="legend"><span><i style="background:var(--exp-blue)"></i>Gamified</span><span><i style="background:var(--ctrl-green)"></i>Control</span></div>
+        <svg viewBox="0 0 640 190" role="img" aria-label="Bar chart. Experiment 2 mean response times: gamified 617 milliseconds versus control 888 milliseconds. Accuracy: gamified 92.1 percent versus control 97.1 percent." style="width:100%;height:auto;font-family:'IBM Plex Mono',monospace">
+          <text x="0" y="16" font-size="12" fill="#5A6068">Mean response time (ms)</text>
+          <rect x="0" y="30" width="278" height="26" fill="#2F6DAE" rx="3"/>
+          <text x="286" y="48" font-size="13" fill="#20242A">617 ms</text>
+          <rect x="0" y="64" width="400" height="26" fill="#6FA05E" rx="3"/>
+          <text x="408" y="82" font-size="13" fill="#20242A">888 ms</text>
+          <text x="0" y="124" font-size="12" fill="#5A6068">Accuracy (%)</text>
+          <rect x="0" y="136" width="424" height="26" fill="#2F6DAE" rx="3"/>
+          <text x="432" y="154" font-size="13" fill="#20242A">92.1%</text>
+          <rect x="0" y="170" width="447" height="18" fill="#6FA05E" rx="3"/>
+          <text x="455" y="185" font-size="13" fill="#20242A">97.1%</text>
+        </svg>
+        <figcaption>Experiment 2: trial-level rewards made users much faster — and measurably less accurate. The system got exactly the behavior it paid for.</figcaption>
+      </figure>
+
+      <div class="implications">
+        <h3 style="margin-top:0">What this means for product design</h3>
+        <ol>
+          <li>If a reward system lives outside the core interaction loop, expect it to distract, not motivate.</li>
+          <li>Audit what a point system literally pays for — that is the behavior you will ship.</li>
+          <li>Trial-level feedback is a proven mechanism for making users feel capable.</li>
+          <li>Choice must be consequential to register as autonomy.</li>
+          <li>Averages hide the story: design and measure for engagement heterogeneity.</li>
+        </ol>
+      </div>
+
+      <div class="study-cta">
+        <a class="btn primary" href="#contact">Discuss this study</a>
+        <a class="btn ghost" href="Case_Study_Gamification.pdf">Full case study (PDF)</a>
+      </div>
+    </article>
+
+    <article class="study soon rv" id="other-research">
+      <h3 class="title" style="margin-bottom:14px">Other research I've supported</h3>
+      <div class="tag-row" style="margin-bottom:14px">
+        <span class="tag">Human-centered cybersecurity</span><span class="tag">AR / HoloLens usability</span><span class="tag">Visual search (manuscript in prep)</span>
+      </div>
+      <p class="sub" style="margin-bottom:0">As lab manager and research assistant across two cross-disciplinary programs at Lehigh, I supported large-scale Qualtrics/Prolific survey research on cybersecurity risk perception, contributed to usability observations of Microsoft HoloLens interactions, and co-authored an in-preparation manuscript on visual search. Team projects rather than my own studies — happy to talk through my role in each.</p>
+    </article>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <p class="sec-cue rv">[ work | <em>about</em> | contact ]</p>
+    <h2 class="rv">About</h2>
+    <div class="about-grid">
+      <div class="rv">
+        <p>I came to UX research through experimental psychology: four years across three research programs at Lehigh University, ending with an M.S. in Psychology (GPA 3.87). Along the way I served as lab manager for a cross-disciplinary program studying human-centered cybersecurity, supported usability research on HoloLens AR interactions, trained and supervised student researchers, and ran the operational layers of research — IRB, recruitment, moderation, analysis, reporting.</p>
+        <p>What that background gives me is a habit of intellectual honesty: I report what the data shows, including null results, and I treat "why did users do that?" as a question you answer with evidence rather than intuition.</p>
+        <p>Outside research hours I design and build a video game solo — code, art, music, and iterative playtesting — which keeps me close to the craft side of the interfaces I study.</p>
+      </div>
+      <div class="rv">
+        <div class="skill-block"><div class="k">Methods</div><div class="v">Usability testing · controlled experiments · A/B logic · survey design · interviews &amp; think-aloud · mixed-methods analysis</div></div>
+        <div class="skill-block"><div class="k">Tools</div><div class="v">Qualtrics · Prolific · Figma · PsychoPy · GitHub · Python · R · SPSS · JASP</div></div>
+        <div class="skill-block"><div class="k">Analysis</div><div class="v">ANOVA · regression · effect sizes · data cleaning &amp; quality · statistical reporting for non-specialists</div></div>
+        <div class="skill-block"><div class="k">Education</div><div class="v">M.S. Psychology, Lehigh University (2025) · B.S. Psychology, summa cum laude, Lehigh University (2022)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="sec-cue rv">[ work | about | <em>contact</em> ]</p>
+    <h2 class="rv">Let's talk research</h2>
+    <p class="lede rv" style="max-width:56ch">I'm currently looking for UX research, insights, and behavioral research roles across PA / NY / NJ and remote. If your team needs someone who can run a study end to end and tell you the truth about the results, I'd love to hear from you.</p>
+    <div class="contact-row rv">
+      <a class="btn primary" href="mailto:njmajor246@gmail.com">njmajor246@gmail.com</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/nicholas-major-64b560345/">LinkedIn</a>
+      <a class="btn ghost" href="Nicholas_Major_UX_Resume.pdf">Resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Nicholas Major</span>
+    <span>trial complete · 100% accuracy · +3 pts</span>
+  </div>
+</footer>
+
+<script>
+  // Hero stimulus: circle <-> square, red <-> blue, like a task-switching trial
+  const stim = document.getElementById('stim');
+  if (stim && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => stim.classList.toggle('sq'), 2600);
+  }
+  // Scroll reveals
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
